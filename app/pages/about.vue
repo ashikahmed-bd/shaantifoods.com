@@ -114,28 +114,28 @@
               <div
                 class="flex items-center gap-3 p-4 rounded-xl border border-border hover:border-primary transition"
               >
-                <img src="/img/icon/1.png" alt="" class="size-10" />
+                <img src="/images/icon/1.png" alt="" class="size-10" />
                 <span class="font-medium">Fresh food</span>
               </div>
 
               <div
                 class="flex items-center gap-3 p-4 rounded-xl border border-border hover:border-primary transition"
               >
-                <img src="/img/icon/2.png" alt="" class="size-10" />
+                <img src="/images/icon/2.png" alt="" class="size-10" />
                 <span class="font-medium">Fast Delivery</span>
               </div>
 
               <div
                 class="flex items-center gap-3 p-4 rounded-xl border border-border hover:border-primary transition"
               >
-                <img src="/img/icon/3.png" alt="" class="size-10" />
+                <img src="/images/icon/3.png" alt="" class="size-10" />
                 <span class="font-medium">Quality Maintain</span>
               </div>
 
               <div
                 class="flex items-center gap-3 p-4 rounded-xl border border-border hover:border-primary transition"
               >
-                <img src="/img/icon/4.png" alt="" class="size-10" />
+                <img src="/images/icon/4.png" alt="" class="size-10" />
                 <span class="font-medium">24/7 Service</span>
               </div>
             </div>
