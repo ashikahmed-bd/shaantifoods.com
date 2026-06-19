@@ -8,11 +8,11 @@
 @import "@nuxt/ui";
 
 @theme {
-  --color-primary: #ce2829;
-  --color-primary-hover: #bb2223;
+  --color-primary: #0d542b;
+  --color-primary-hover: #0d542b;
 
-  --color-accent: #fdc913;
-  --color-accent-hover: #edbc11;
+  --color-accent: #0d542b;
+  --color-accent-hover: #0d542b;
 
   --color-background: #faf7f2;
   --color-surface: #ecfdf5;
@@ -41,13 +41,11 @@
 
 @layer base {
   html {
-    font-family: var(
-      --font-sans,
-      "Inter",
-      system-ui,
-      -apple-system,
-      sans-serif
-    );
+    font-family: var(--font-sans,
+        "Inter",
+        system-ui,
+        -apple-system,
+        sans-serif);
     line-height: 1.6;
     scroll-behavior: smooth;
   }

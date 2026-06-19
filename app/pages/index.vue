@@ -1,241 +1,246 @@
-<script setup></script>
+<script setup>
+const products = [
+  {
+    name: "Premium Dried Mango",
+    description: "Natural taste with attractive texture and long shelf life.",
+    image_url: "/images/products/1.jpg",
+    action: "VIEW PRODUCT",
+    available: true,
+  },
+  {
+    name: "Freeze-Dried Mango",
+    description: "Coming Soon",
+    image_url: "/images/products/2.jpg",
+    action: "LEARN MORE",
+    available: false,
+  },
+  {
+    name: "Mango Puree",
+    description:
+      "Available for industrial and food-service use.",
+    image_url: "/images/products/3.jpg",
+    action: "VIEW PRODUCT",
+    available: true,
+  },
+]
+</script>
 
 <template>
-  <main class="bg-white">
-    <section class="max-w-7xl mx-auto px-4 py-4">
-      <div
-        class="relative bg-primary bg-[url('/images/banner/hero.png')] bg-cover bg-center bg-no-repeat overflow-hidden rounded-2xl py-12"
-      >
-        <div class="flex justify-center">
-          <div class="w-full max-w-2xl self-center">
+  <main class="max-w-7xl mx-auto px-4">
+
+    <section class="relative">
+      <img src="/images/hero.png" class="w-full h-auto object-cover object-center" alt="">
+
+
+      <div class="absolute inset-0 px-5 py-10">
+        <div class="max-w-md">
+          <h2 class="mb-4 text-4xl font-extrabold leading-tight text-green-950">
+            Premium Mango
+            Products From
+            Bangladesh
+          </h2>
+
+          <p class="mb-6 text-base leading-relaxed text-gray-700">
+            From carefully selected mangoes to international-quality
+            processing, Shaanti Foods delivers premium dried mango
+            products for global buyers.
+          </p>
+
+          <div class="space-y-3">
+            <UButton block size="xl" color="warning" class="h-14 justify-center text-base font-bold">
+              <UIcon name="i-lucide-calendar" class="mr-2" />
+              REQUEST A MEETING
+            </UButton>
+
+            <UButton block size="xl" color="success" variant="outline" class="h-14 justify-center text-base font-bold">
+              <UIcon name="i-lucide-gift" class="mr-2" />
+              REQUEST FREE SAMPLE
+            </UButton>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-green-900 text-white">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 px-4 py-8">
+        <div class="flex items-center gap-3">
+          <UIcon name="i-lucide-map-pin" class="size-7" />
+          <div>
+            <p class="font-semibold">
+              Bangladesh
+            </p>
+            <p class="text-sm text-white/80">
+              Origin
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <UIcon name="i-lucide-leaf" class="size-7" />
+          <div>
+            <p class="font-semibold">
+              Premium
+            </p>
+            <p class="text-sm text-white/80">
+              Processing
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <UIcon name="i-lucide-shield-check" class="size-7" />
+          <div>
+            <p class="font-semibold">
+              Export-Oriented
+            </p>
+            <p class="text-sm text-white/80">
+              Production
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <UIcon name="i-lucide-circle-check" class="size-7" />
+          <div>
+            <p class="font-semibold">
+              Hygienic
+            </p>
+            <p class="text-sm text-white/80">
+              Manufacturing
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-4 py-10">
+      <h2 class="mb-10 text-center text-3xl font-bold text-green-900">
+        Why Global Buyers Choose Us
+      </h2>
+
+      <div class="space-y-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <UCard>
             <div class="text-center">
-              <h3 class="text-accent text-xl md:text-3xl font-semibold mb-2">
-                Do not miss it!
+              <div class="mx-auto mb-4 flex size-20 items-center justify-center rounded-full bg-green-50">
+                <UIcon name="i-lucide-sprout" class="size-10 text-green-700" />
+              </div>
+
+              <h3 class="mb-2 text-xl font-bold">
+                Direct From Mango Farms
               </h3>
 
-              <h1
-                class="text-5xl md:text-7xl text-white tracking-widest uppercase font-bold"
-              >
-                Pizza tastes better <br />
-                than skinny feels.
-              </h1>
-
-              <a
-                href="#"
-                class="inline-block mt-6 bg-accent text-dark px-6 py-3 rounded-full font-semibold hover:opacity-90 transition"
-              >
-                GET IT NOW
-              </a>
+              <p class="text-gray-600">
+                Carefully sourced mangoes from Bangladesh's leading
+                mango-growing regions.
+              </p>
             </div>
-          </div>
+          </UCard>
+
+          <UCard>
+            <div class="text-center">
+              <div class="mx-auto mb-4 flex size-20 items-center justify-center rounded-full bg-orange-50">
+                <UIcon name="i-lucide-apple" class="size-10 text-orange-500" />
+              </div>
+
+              <h3 class="mb-2 text-xl font-bold">
+                Premium Quality
+              </h3>
+
+              <p class="text-gray-600">
+                Selected fruits processed using modern dehydration
+                technology.
+              </p>
+            </div>
+          </UCard>
+
+          <UCard>
+            <div class="text-center">
+              <div class="mx-auto mb-4 flex size-20 items-center justify-center rounded-full bg-green-50">
+                <UIcon name="i-lucide-handshake" class="size-10 text-green-700" />
+              </div>
+
+              <h3 class="mb-2 text-xl font-bold">
+                Reliable Supply
+              </h3>
+
+              <p class="text-gray-600">
+                Consistent quality and scalable production for long-term
+                business partnerships.
+              </p>
+            </div>
+          </UCard>
         </div>
       </div>
     </section>
 
-    <section class="py-6">
-      <div class="max-w-7xl mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <article
-            class="group bg-primary relative aspect-square overflow-hidden rounded-xl"
-          >
-            <img
-              src="/images/offer/1.png"
-              alt="Food"
-              class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
 
-            <div class="absolute bottom-4 right-4 z-10">
-              <div
-                class="flex flex-col items-center justify-center size-48 rounded-full bg-yellow-400 text-black font-bold shadow-xl ring-4 ring-white"
-              >
-                <span class="text-3xl font-script">BUY 2 </span>
-                <span class="text-6xl font-sans italic font-extrabold"
-                  >GET 1
-                </span>
-
-                <span class="text-3xl text-highlight italic font-sans"
-                  >FREE</span
-                >
-              </div>
-            </div>
-
-            <div class="relative p-4 md:p-10">
-              <h2 class="text-7xl text-white font-semibold font-serif">
-                Special Delicious
-              </h2>
-              <h5 class="text-2xl text-white font-semibold font-sans">
-                Mexican Pizza Tastes Better
-              </h5>
-              <div class="py-8">
-                <a
-                  class="bg-white px-6 py-2.5 rounded-full text-primary"
-                  href="#"
-                >
-                  ORDER NOW
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <div class="grid gap-6">
-            <article
-              class="relative bg-dark rounded-xl overflow-hidden flex items-stretch px-6 py-8"
-            >
-              <div class="absolute left-0 transition">
-                <img
-                  src="/images/offer/2.png"
-                  class="w-full object-contain hover:"
-                  alt="Burger"
-                />
-              </div>
-              <div class="max-w-md z-10 relative">
-                <h3
-                  class="text-white text-3xl md:text-4xl font-extrabold leading-tight"
-                >
-                  Enjoy Our <br />
-                  Delicious Item
-                </h3>
-
-                <button
-                  class="mt-6 bg-white text-primary rounded-full px-6 py-3 text-sm font-bold hover:bg-gray-200 transition"
-                >
-                  ORDER NOW
-                </button>
-              </div>
-            </article>
-            <article
-              class="relative bg-yellow-50 rounded-xl overflow-hidden flex items-stretch px-6 py-8"
-            >
-              <div class="absolute left-0 transition">
-                <img
-                  src="/images/offer/3.png"
-                  class="w-full object-contain hover:"
-                  alt="Burger"
-                />
-              </div>
-
-              <div class="max-w-md z-10 relative">
-                <h3
-                  class="text-dark text-3xl md:text-4xl font-extrabold leading-tight"
-                >
-                  The Fastest In <br />
-                  Delivery <span class="text-primary">Food</span>
-                </h3>
-
-                <button
-                  class="mt-6 bg-white text-primary border border-primary rounded-full px-6 py-3 text-sm font-bold transition"
-                >
-                  ORDER NOW
-                </button>
-              </div>
-            </article>
-          </div>
-        </div>
+    <section class="px-4 py-8">
+      <!-- Title -->
+      <div class="mb-6 text-center">
+        <h2 class="text-3xl font-bold text-green-900">
+          Our Products
+        </h2>
       </div>
-    </section>
 
-    <section class="py-6">
-      <div class="max-w-7xl mx-auto px-4">
-        <article class="relative bg-accent rounded-lg overflow-hidden">
-          <img
-            src="/images/offer/4.png"
-            class="w-full h-auto object-cover"
-            alt="Burger"
-          />
+      <!-- Products -->
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <article v-for="product in products" :key="product.name" class="overflow-hidden border border-border">
+          <img :src="product.image_url" :alt="product.name" class="h-auto w-full object-cover">
 
-          <div
-            class="absolute inset-0 flex flex-col justify-center px-4 sm:px-6 md:px-10 text-black"
-          >
-            <div class="max-w-[70%] sm:max-w-sm md:max-w-md">
-              <p
-                class="font-script text-lg sm:text-2xl md:text-4xl leading-tight"
-              >
-                Double Cheese
-              </p>
+          <div class="space-y-3 p-4">
+            <h3 class="text-xl font-bold text-green-900">
+              {{ product.name }}
+            </h3>
 
-              <h2
-                class="text-primary text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none"
-              >
-                BURGER
-              </h2>
+            <p class="text-sm text-gray-600 line-clamp-2">
+              {{ product.description }}
+            </p>
 
-              <p
-                class="mt-2 sm:mt-3 md:mt-4 font-body text-sm sm:text-lg md:text-2xl leading-snug"
-              >
-                With Free Coca-Cola. Stay home, we deliver
-              </p>
-            </div>
+            <button class="flex items-center gap-2 font-semibold" :class="product.available
+              ? 'text-green-800'
+              : 'text-orange-500'
+              ">
+              {{ product.action }}
+
+              <UIcon name="i-lucide-arrow-right" class="size-4" />
+            </button>
           </div>
         </article>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-          <article
-            class="group relative aspect-square overflow-hidden rounded-xl"
-          >
-            <img
-              src="/images/offer/5.png"
-              alt="Food"
-              class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
+      </div>
 
-            <div class="relative flex h-full flex-col justify-start p-5">
-              <h3
-                class="text-xl md:text-3xl font-extrabold leading-tight text-yellow-400"
-              >
-                Enjoy 30% <br />
-                CashBack
-              </h3>
 
-              <p
-                class="mt-2 md:mt-3 text-sm md:text-lg font-semibold text-gray-200"
-              >
-                Up to $70 on all Bikash
-              </p>
-            </div>
-          </article>
-          <article
-            class="group relative aspect-square overflow-hidden rounded-xl"
-          >
-            <img
-              src="/images/offer/6.png"
-              alt="Food"
-              class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
+      <div class="relative mt-8 overflow-hidden rounded-2xl bg-green-800">
+        <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=1200"
+          class="absolute inset-0 h-full w-full object-cover opacity-30" alt="">
 
-            <div class="relative flex h-full flex-col justify-start p-5">
-              <h3 class="text-xl md:text-4xl font-extrabold leading-tight">
-                <p class="text-primary">25 EXTRA</p>
-                FREE ON KFC
-              </h3>
+        <div class="relative p-6 md:p-8">
+          <div class="mb-6">
+            <h3 class="mb-2 text-3xl font-bold text-white">
+              Start With A Sample
+            </h3>
 
-              <p
-                class="mt-2 md:mt-3 text-sm md:text-lg font-semibold text-dark"
-              >
-                Up to $70 on all Bikash
-              </p>
-            </div>
-          </article>
-          <article
-            class="group relative aspect-square overflow-hidden rounded-xl"
-          >
-            <img
-              src="/images/offer/7.png"
-              alt="Food"
-              class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
+            <p class="max-w-md text-green-100">
+              Experience the quality before making a purchasing decision.
+            </p>
+          </div>
 
-            <div class="relative flex h-full flex-col justify-start p-5">
-              <h5 class="font-script text-yellow-400 text-2xl">Test with</h5>
-              <h3
-                class="text-xl text-white md:text-4xl font-extrabold leading-tight"
-              >
-                <p class="text-yellow-400">JAPANESE</p>
-                FOOD AT HOME
-              </h3>
-            </div>
-          </article>
+          <div class="flex items-center gap-4 max-w-xl">
+            <UButton size="xl" color="warning" block class="h-14 font-semibold shadow-lg">
+              <UIcon name="i-lucide-gift" class="mr-2 size-5" />
+              REQUEST FREE SAMPLE
+            </UButton>
+
+            <UButton size="xl" block
+              class="h-14 border border-white/30 bg-white/10 font-semibold text-white backdrop-blur hover:bg-white/20">
+              <UIcon name="i-lucide-phone" class="mr-2 size-5" />
+              CONTACT OUR TEAM
+            </UButton>
+          </div>
         </div>
       </div>
     </section>
+
   </main>
 </template>
 
