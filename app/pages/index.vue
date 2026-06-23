@@ -27,6 +27,9 @@ const products = [
 
 <template>
   <main class="max-w-7xl mx-auto px-4 py-3.5">
+    <SeoMeta title="Shaanti Foods (BD) Limited - Premium Mango Export & Food Products"
+      description="Shaanti Foods (BD) Limited delivers premium quality mango products worldwide with certified food safety, hygienic processing, and export-standard packaging."
+      keywords="Shaanti Foods, mango export Bangladesh, premium mango, food processing company, export mango supplier, Bangladesh food export" />
 
     <section class="relative overflow-hidden rounded-2xl">
       <img src="/images/hero.jpg" class="absolute inset-0 h-full w-full object-cover object-center" alt="Hero Banner" />
