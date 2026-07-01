@@ -1,329 +1,226 @@
 <script setup>
 const route = useRoute();
 
-const { data: product, pending, error } = await useAsyncData(
-    `product-${route.params.slug}`,
-    async () => {
-        const products = await $fetch('/api/products')
+const {
+  data: product,
+  pending,
+  error,
+} = await useAsyncData(`product-${route.params.slug}`, async () => {
+  const products = await $fetch("/api/products");
 
-        return products.find(
-            item => item.slug === route.params.slug
-        )
-    }
-);
+  return products.find((item) => item.slug === route.params.slug);
+});
 
-const images = computed(() => [
-    product.value?.cover_url,
-    ...(product.value?.gallery || [])
-].filter(Boolean))
+const images = [
+  "/images/products/freeze-mango/main.jpg",
+  "/images/products/freeze-mango/main.jpg",
+  "/images/products/freeze-mango/main.jpg",
+  "/images/products/freeze-mango/main.jpg",
+];
+
+const activeImage = ref(images[0]);
 </script>
 
 <template>
-    <main>
-        <div v-if="pending" class="container mx-auto px-4 py-20">
-            Loading...
+  <main class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div>
+        <div class="rounded-2xl overflow-hidden bg-white">
+          <img :src="activeImage" class="w-full object-cover" alt="Product" />
         </div>
 
-        <div v-else-if="error" class="container mx-auto px-4 py-20">
-            Product not found
+        <div class="flex gap-3 mt-4">
+          <button
+            v-for="(img, i) in images"
+            :key="i"
+            @click="activeImage = img"
+            class="rounded-xl overflow-hidden w-20 h-20"
+            :class="activeImage === img ? 'ring-2 ring-green-600' : ''"
+          >
+            <img :src="img" class="w-full h-full object-cover" />
+          </button>
+        </div>
+      </div>
+
+      <div class="space-y-5">
+        <h1 class="text-3xl font-bold text-primary">Premium Dried Mango</h1>
+        <p class="text-gray-500">
+          Naturally delicious dried mango made from carefully selected ripe
+          mangoes using modern dehydration technology.
+        </p>
+
+        <div class="flex flex-wrap gap-2">
+          <span
+            class="flex items-center gap-1 px-3 py-1 text-sm bg-green-50 text-green-700 rounded-full"
+          >
+            <UIcon name="i-heroicons-check-circle" class="w-4 h-4" />
+            Natural Taste
+          </span>
+
+          <span
+            class="flex items-center gap-1 px-3 py-1 text-sm bg-green-50 text-green-700 rounded-full"
+          >
+            <UIcon name="i-heroicons-sparkles" class="w-4 h-4" />
+            No Additives
+          </span>
+
+          <span
+            class="flex items-center gap-1 px-3 py-1 text-sm bg-green-50 text-green-700 rounded-full"
+          >
+            <UIcon name="i-heroicons-clock" class="w-4 h-4" />
+            Long Shelf Life
+          </span>
         </div>
 
-        <div v-else class="bg-white">
+        <div class="space-y-3">
+          <button
+            class="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-xl transition"
+          >
+            REQUEST FREE SAMPLE
+          </button>
 
-            <div class="container mx-auto px-4 py-10">
+          <button
+            class="w-full flex items-center justify-center gap-2 border border-green-600 text-green-700 font-medium py-3 rounded-xl hover:bg-green-50 transition"
+          >
+            CONTACT US ON WHATSAPP
+          </button>
+        </div>
+      </div>
+    </div>
 
-                <div class="mb-8 flex items-center gap-2 text-sm text-gray-500">
-                    <NuxtLink to="/">
-                        Home
-                    </NuxtLink>
+    <div class="space-y-6">
+      <UCard class="p-5">
+        <div class="flex gap-4 items-start">
+          <UIcon
+            name="i-heroicons-document-text"
+            class="w-6 h-6 text-green-700 mt-1"
+          />
 
-                    <span>/</span>
+          <div class="flex-1">
+            <h3 class="text-lg font-semibold text-gray-900">
+              Product Description
+            </h3>
 
-                    <NuxtLink to="/products">
-                        Products
-                    </NuxtLink>
+            <p class="text-sm text-gray-600 mt-2 leading-relaxed">
+              Shaanti Premium Dried Mango is made from the finest ripe mangoes
+              cultivated in Rajshahi, Bangladesh. Advanced dehydration process
+              preserves natural flavor, vibrant color and essential nutrients
+              without artificial ingredients. It is soft, chewy and packed with
+              tropical goodness of real mango.
+            </p>
+          </div>
 
-                    <span>/</span>
+          <img
+            src="/images/products/freeze-mango/main.jpg"
+            class="w-24 h-24 object-cover rounded-xl"
+          />
+        </div>
+      </UCard>
 
-                    <span class="font-medium text-gray-900">
-                        {{ product.name }}
-                    </span>
-                </div>
+      <!-- GRID SECTION -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- INGREDIENT INFO -->
+        <UCard class="p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <UIcon
+              name="i-heroicons-clipboard-document-list"
+              class="w-5 h-5 text-green-700"
+            />
+            <h3 class="font-semibold text-gray-900">Ingredient Info</h3>
+          </div>
 
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li>• Mango Variety: Selected Premium Varieties</li>
+            <li>• Origin: Rajshahi, Bangladesh</li>
+            <li>• Harvest Season: May - July</li>
+            <li>• Ingredients: 100% Mango</li>
+            <li>• Additives: No additives or preservatives</li>
+          </ul>
+        </UCard>
 
-                <div class="grid gap-12 lg:grid-cols-2">
-                    <div>
-                        <ProductGallery :images="images" />
-                        <div class="mt-8 grid gap-4 sm:grid-cols-2">
-                            <div v-for="feature in product.features" :key="feature"
-                                class="rounded-2xl border border-gray-200 p-4">
-                                <div class="flex items-center gap-3">
-                                    <UIcon name="i-lucide-check-circle" class="size-5 text-green-600" />
-                                    <span class="font-medium">
-                                        {{ feature }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- SPECIFICATIONS -->
+        <UCard class="p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <UIcon
+              name="i-heroicons-cog-6-tooth"
+              class="w-5 h-5 text-green-700"
+            />
+            <h3 class="font-semibold text-gray-900">Specifications</h3>
+          </div>
 
-
-                    <div>
-                        <div class="mb-4 flex flex-wrap gap-3">
-                            <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
-                                In Stock
-                            </span>
-                            <span v-if="product.featured"
-                                class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                                Featured Product
-                            </span>
-                        </div>
-
-                        <h1 class="mb-4 text-4xl font-bold text-gray-900">
-                            {{ product.name }}
-                        </h1>
-
-                        <p class="mb-6 text-lg leading-8 text-gray-600">
-                            {{ product.overview }}
-                        </p>
-
-
-                        <div class="mb-8 flex items-center gap-4">
-                            <span class="text-4xl font-bold text-primary">
-                                {{ product.currency }}
-                                {{ product.price }}
-                            </span>
-                            <span class="text-xl text-gray-400 line-through">
-                                {{ product.currency }}
-                                {{ product.compare_price }}
-                            </span>
-                        </div>
-
-                        <div class="mb-8 grid gap-4 sm:grid-cols-2">
-                            <div class="rounded-2xl border border-border p-4">
-                                <div class="text-sm text-gray-500">
-                                    SKU
-                                </div>
-                                <div class="font-semibold">
-                                    {{ product.sku }}
-                                </div>
-                            </div>
-
-                            <div class="rounded-2xl border border-border p-4">
-                                <div class="text-sm text-gray-500">
-                                    MOQ
-                                </div>
-
-                                <div class="font-semibold">
-                                    {{ product.minimum_order_quantity }}
-                                    {{ product.unit }}
-                                </div>
-                            </div>
-
-                            <div class="rounded-2xl border border-border p-4">
-                                <div class="text-sm text-gray-500">
-                                    Origin
-                                </div>
-
-                                <div class="font-semibold">
-                                    {{ product.region }},
-                                    {{ product.country_of_origin }}
-                                </div>
-                            </div>
-
-                            <div class="rounded-2xl border border-border p-4">
-                                <div class="text-sm text-gray-500">
-                                    Stock Quantity
-                                </div>
-
-                                <div class="font-semibold">
-                                    {{ product.stock_quantity }}
-                                    {{ product.unit }}
-                                </div>
-                            </div>
-
-                            <div class="rounded-2xl border border-border p-4">
-                                <div class="text-sm text-gray-500">
-                                    Shelf Life
-                                </div>
-
-                                <div class="font-semibold">
-                                    {{ product.specifications.shelf_life }}
-                                </div>
-                            </div>
-
-                            <div class="rounded-2xl border border-border p-4">
-                                <div class="text-sm text-gray-500">
-                                    Variety
-                                </div>
-
-                                <div class="font-semibold">
-                                    {{ product.specifications.variety }}
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="mb-8">
-                            <h3 class="mb-3 font-semibold">
-                                Certifications
-                            </h3>
-
-                            <div class="flex flex-wrap gap-2">
-                                <span v-for="item in product.specifications.certification" :key="item"
-                                    class="rounded-xl bg-green-50 px-3 py-2 text-sm font-medium text-green-700">
-                                    {{ item }}
-                                </span>
-                            </div>
-                        </div>
-
-
-                        <div class="grid gap-4 md:grid-cols-2">
-                            <button
-                                class="rounded-2xl bg-primary px-6 py-4 font-semibold text-white transition hover:opacity-90">
-                                Request Quotation
-                            </button>
-                            <button class="rounded-2xl border border-primary px-6 py-4 font-semibold text-primary">
-                                Request Sample
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="mt-20">
-                    <UTabs :items="[
-                        {
-                            label: 'Description',
-                            slot: 'description'
-                        },
-                        {
-                            label: 'Specifications',
-                            slot: 'specifications'
-                        },
-                        {
-                            label: 'Benefits',
-                            slot: 'benefits'
-                        },
-                        {
-                            label: 'Shipping',
-                            slot: 'shipping'
-                        }
-                    ]">
-                        <template #description>
-                            <div class="prose max-w-none">
-                                <p class="leading-8">
-                                    {{ product.description }}
-                                </p>
-                            </div>
-                        </template>
-
-                        <template #specifications>
-                            <div class="overflow-hidden rounded-3xl border border-border">
-                                <table class="w-full">
-                                    <tbody>
-                                        <tr class="border-b">
-                                            <td class="bg-gray-50 p-4 font-semibold">
-                                                Variety
-                                            </td>
-
-                                            <td class="p-4">
-                                                {{ product.specifications.variety }}
-                                            </td>
-                                        </tr>
-
-                                        <tr class="border-b">
-                                            <td class="bg-gray-50 p-4 font-semibold">
-                                                Moisture
-                                            </td>
-
-                                            <td class="p-4">
-                                                {{ product.specifications.moisture }}
-                                            </td>
-                                        </tr>
-
-                                        <tr class="border-b">
-                                            <td class="bg-gray-50 p-4 font-semibold">
-                                                Shelf Life
-                                            </td>
-
-                                            <td class="p-4">
-                                                {{ product.specifications.shelf_life }}
-                                            </td>
-                                        </tr>
-
-                                        <tr class="border-b">
-                                            <td class="bg-gray-50 p-4 font-semibold">
-                                                Storage
-                                            </td>
-
-                                            <td class="p-4">
-                                                {{ product.specifications.storage }}
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="bg-gray-50 p-4 font-semibold">
-                                                Packaging
-                                            </td>
-
-                                            <td class="p-4">
-                                                {{ product.specifications.packaging }}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </template>
-
-                        <template #benefits>
-                            <div class="grid gap-4 md:grid-cols-2">
-                                <div v-for="benefit in product.benefits" :key="benefit"
-                                    class="rounded-2xl border border-border p-4">
-                                    <div class="flex items-center gap-3">
-                                        <UIcon name="i-lucide-badge-check" class="text-primary" />
-                                        <span>
-                                            {{ benefit }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-
-                        <template #shipping>
-                            <div class="grid gap-6 md:grid-cols-3">
-                                <div class="rounded-2xl border border-border p-4">
-                                    <div class="text-sm text-gray-500">
-                                        Lead Time
-                                    </div>
-                                    <div class="mt-2 font-semibold">
-                                        {{ product.shipping.lead_time }}
-                                    </div>
-                                </div>
-
-                                <div class="rounded-2xl border border-border p-4">
-                                    <div class="text-sm text-gray-500">
-                                        Export Available
-                                    </div>
-                                    <div class="mt-2 font-semibold text-green-600">
-                                        Yes
-                                    </div>
-                                </div>
-
-                                <div class="rounded-2xl border border-border p-4">
-                                    <div class="text-sm text-gray-500">
-                                        Shipping Methods
-                                    </div>
-                                    <div class="mt-2">
-                                        {{ product.shipping.shipping_method.join(', ') }}
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </UTabs>
-                </div>
+          <div class="space-y-2 text-sm text-gray-600">
+            <div class="flex justify-between">
+              <span>Moisture (Water Activity)</span>
+              <span>≤ 0.60</span>
             </div>
-        </div>
-    </main>
+            <div class="flex justify-between">
+              <span>Sugar Level (Brix)</span>
+              <span>60° ± 5°</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Size</span>
+              <span>Length: 8–12 cm</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Best Before</span>
+              <span>12 Months</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Packaging</span>
+              <span>100g, 200g, 500g, 1kg</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Storage</span>
+              <span>Cool & Dry Place</span>
+            </div>
+          </div>
+        </UCard>
 
+        <!-- SUGGESTED USES -->
+        <UCard class="p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <UIcon
+              name="i-heroicons-light-bulb"
+              class="w-5 h-5 text-green-700"
+            />
+            <h3 class="font-semibold text-gray-900">Suggested Uses</h3>
+          </div>
+
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li>• Healthy snacks</li>
+            <li>• Baking ingredients</li>
+            <li>• Yogurt and cereal topping</li>
+            <li>• Smoothies and beverages</li>
+            <li>• Ice cream and desserts</li>
+          </ul>
+        </UCard>
+
+        <!-- CERTIFICATIONS -->
+        <UCard class="p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <UIcon
+              name="i-heroicons-shield-check"
+              class="w-5 h-5 text-green-700"
+            />
+            <h3 class="font-semibold text-gray-900">Certifications</h3>
+          </div>
+
+          <div class="flex flex-wrap gap-2 text-sm">
+            <span class="px-3 py-1 bg-green-50 text-green-700 rounded-full"
+              >HACCP</span
+            >
+            <span class="px-3 py-1 bg-green-50 text-green-700 rounded-full"
+              >ISO 22000 (In Progress)</span
+            >
+            <span class="px-3 py-1 bg-green-50 text-green-700 rounded-full"
+              >Halal (In Progress)</span
+            >
+            <span class="px-3 py-1 bg-green-50 text-green-700 rounded-full"
+              >Export Registration</span
+            >
+          </div>
+        </UCard>
+      </div>
+    </div>
+  </main>
 </template>
