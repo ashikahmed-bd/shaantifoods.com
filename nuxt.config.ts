@@ -7,30 +7,26 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
+  modules: ['@nuxt/ui', '@nuxtjs/supabase', '@nuxt/image'],
+
   css: ['./app/assets/css/main.css'],
-  
+
   vite: {
     plugins: [
       tailwindcss(),
     ],
   },
 
-  modules: ['@nuxt/ui'],
+  supabase: {
+    redirect: false,
+  },
 
-  app: {
-    head: {
-      charset: 'utf-8',
-      viewport: 'width=device-width, initial-scale=1',
-      htmlAttrs: {
-        lang: 'en',
-      },
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      ],
-      bodyAttrs: {
-        class: 'antialiased text-base  font-body text-dark overflow-x-hidden',
-      },
-      
-    },
+  runtimeConfig: {
+    public: {
+      supabase: {
+        url: 'https://efejhwtqsqmyloltjfrq.supabase.co',
+        key: 'sb_publishable_AtUyYi81o34-l1L25xds3g__2XlzeHZ'
+      }
+    }
   },
 })

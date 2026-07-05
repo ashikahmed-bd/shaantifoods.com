@@ -80,9 +80,7 @@ watch(
             <div class="leading-tight">
               <p class="text-xs text-muted">Support</p>
 
-              <a href="tel:+8801333663388" class="text-sm font-semibold">
-                +880 1333 663388
-              </a>
+              <span class="text-sm font-semibold"> +880 1333 663388 </span>
             </div>
           </a>
         </div>
