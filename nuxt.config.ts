@@ -7,7 +7,7 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
-  modules: ['@nuxt/ui', '@nuxtjs/supabase', '@nuxt/image'],
+  modules: ['@nuxt/ui', '@nuxt/image', '@pinia/nuxt', 'pinia-plugin-unstorage/nuxt'],
 
   css: ['./app/assets/css/main.css'],
 
@@ -17,16 +17,11 @@ export default defineNuxtConfig({
     ],
   },
 
-  supabase: {
-    redirect: false,
-  },
-
+ 
   runtimeConfig: {
     public: {
-      supabase: {
-        url: 'https://efejhwtqsqmyloltjfrq.supabase.co',
-        key: 'sb_publishable_AtUyYi81o34-l1L25xds3g__2XlzeHZ'
-      }
+      apiBase: 'https://api.shaantifoods.com',
+      baseUrl: 'https://shaantifoods.com',
     }
   },
 })

@@ -1,4 +1,5 @@
 <script setup>
+const settings = useSettings();
 const isOpen = ref(false);
 
 const navigation = [
@@ -53,14 +54,14 @@ watch(
         <div class="hidden items-center gap-5 lg:flex">
           <div class="flex items-center gap-3">
             <NuxtLink
-              to="/auth/sign-in"
+              to="/auth/login"
               class="rounded-full border border-border px-5 py-2.5 text-sm font-medium transition hover:bg-muted"
             >
               Sign In
             </NuxtLink>
 
             <NuxtLink
-              to="/auth/sign-up"
+              to="/auth/login"
               class="rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:opacity-90"
             >
               Sign Up
@@ -68,7 +69,7 @@ watch(
           </div>
 
           <a
-            href="tel:+8801333663388"
+            :href="'tel:' + settings?.phone"
             class="flex items-center gap-3 border-l border-border pl-5 transition hover:text-primary"
           >
             <span
@@ -80,13 +81,13 @@ watch(
             <div class="leading-tight">
               <p class="text-xs text-muted">Support</p>
 
-              <span class="text-sm font-semibold"> +880 1333 663388 </span>
+              <span class="text-sm font-semibold">{{ settings?.phone }} </span>
             </div>
           </a>
         </div>
 
         <NuxtLink
-          to="/account"
+          to="/dashboard"
           class="flex size-10 items-center justify-center rounded-full border border-border lg:hidden"
         >
           <UIcon name="i-lucide-user-round" class="size-5" />

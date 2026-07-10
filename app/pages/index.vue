@@ -1,278 +1,208 @@
 <script setup>
-const products = [
-  {
-    name: "Premium Dried Mango",
-    slug: "premium-dried-mango",
-    description: "Natural taste with attractive texture and long shelf life.",
-    image_url: "/images/products/premium-dried-mango/main.jpg",
-    action: "VIEW PRODUCT",
-    available: true,
-  },
-  {
-    name: "Freeze Mango",
-    slug: "freeze-mango",
-    description: "Coming Soon",
-    image_url: "/images/products/freeze-mango/main.jpg",
-    action: "LEARN MORE",
-    available: false,
-  },
-  {
-    name: "Mango Puree",
-    slug: "mango-puree",
-    description: "Available for industrial and food-service use.",
-    image_url: "/images/products/mango-puree/main.jpg",
-    action: "VIEW PRODUCT",
-    available: false,
-  },
-];
+const appStore = useAppStore();
+
+const {
+  data: home,
+  pending,
+  error,
+  refresh,
+} = await useAsyncData("home", async () => {
+  return await appStore.getHome();
+});
 </script>
 
 <template>
   <main class="max-w-7xl mx-auto px-4 py-3.5">
-    <SeoMeta
-      title="Shaanti Foods (BD) Limited - Premium Mango Export & Food Products"
-      description="Shaanti Foods (BD) Limited delivers premium quality mango products worldwide with certified food safety, hygienic processing, and export-standard packaging."
-      keywords="Shaanti Foods, mango export Bangladesh, premium mango, food processing company, export mango supplier, Bangladesh food export"
-    />
+    <LoadingState v-if="pending" />
 
-    <section class="relative overflow-hidden rounded-2xl">
-      <img
-        src="/images/hero.jpg"
-        class="absolute inset-0 h-full w-full object-cover object-center"
-        alt="Hero Banner"
+    <ErrorState v-else-if="error" :retry="refresh" />
+
+    <template v-else-if="home">
+      <SeoMeta
+        title="Shaanti Foods (BD) Limited - Premium Mango Export & Food Products"
+        description="Shaanti Foods (BD) Limited delivers premium quality mango products worldwide with certified food safety, hygienic processing, and export-standard packaging."
+        keywords="Shaanti Foods, mango export Bangladesh, premium mango, food processing company, export mango supplier, Bangladesh food export"
       />
 
-      <div
-        class="relative flex min-h-96 items-center px-4 sm:px-6 lg:px-12 py-16"
-      >
-        <div class="w-full max-w-3xl">
-          <p
-            class="mb-4 inline-flex items-center rounded-full bg-white/10 px-4 py-1 text-xs font-medium text-white backdrop-blur"
-          >
-            Premium Export Quality
-          </p>
-
-          <h1
-            class="mb-5 text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-white"
-          >
-            Premium Mango Products<br class="hidden sm:block" />
-            From Bangladesh
-          </h1>
-
-          <p
-            class="mb-8 text-sm sm:text-base md:text-lg leading-relaxed text-white/80"
-          >
-            From carefully selected mangoes to international-quality processing,
-            Shaanti Foods delivers premium dried mango products for global
-            buyers.
-          </p>
-
-          <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
-            <button
-              class="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-lg bg-amber-500 px-6 text-sm font-semibold text-white transition hover:bg-amber-600"
-            >
-              <UIcon name="i-lucide-calendar" class="mr-2" />
-              Request Meeting
-            </button>
-
-            <button
-              class="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-lg border border-white/70 bg-white/10 px-6 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20"
-            >
-              <UIcon name="i-lucide-gift" class="mr-2" />
-              Free Sample
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-green-900 text-white rounded-2xl mt-6">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 px-6 py-8">
-        <div class="flex items-center gap-3">
-          <UIcon name="i-lucide-map-pin" class="size-6 text-emerald-300" />
-          <div>
-            <p class="font-semibold">Bangladesh</p>
-            <p class="text-xs text-white/70">Origin</p>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <UIcon name="i-lucide-leaf" class="size-6 text-emerald-300" />
-          <div>
-            <p class="font-semibold">Premium</p>
-            <p class="text-xs text-white/70">Processing</p>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <UIcon name="i-lucide-shield-check" class="size-6 text-emerald-300" />
-          <div>
-            <p class="font-semibold">Export-Oriented</p>
-            <p class="text-xs text-white/70">Production</p>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <UIcon name="i-lucide-circle-check" class="size-6 text-emerald-300" />
-          <div>
-            <p class="font-semibold">Hygienic</p>
-            <p class="text-xs text-white/70">Manufacturing</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="px-4 py-10">
-      <h2 class="mb-10 text-center text-3xl font-bold text-green-900">
-        Why Global Buyers Choose Us
-      </h2>
-
-      <div class="space-y-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <UCard>
-            <div class="text-center">
-              <div
-                class="mx-auto mb-4 flex size-20 items-center justify-center rounded-full bg-green-50"
-              >
-                <UIcon name="i-lucide-sprout" class="size-10 text-green-700" />
-              </div>
-
-              <h3 class="mb-2 text-xl font-bold">Direct From Mango Farms</h3>
-
-              <p class="text-gray-600">
-                Carefully sourced mangoes from Bangladesh's leading
-                mango-growing regions.
-              </p>
-            </div>
-          </UCard>
-
-          <UCard>
-            <div class="text-center">
-              <div
-                class="mx-auto mb-4 flex size-20 items-center justify-center rounded-full bg-orange-50"
-              >
-                <UIcon name="i-lucide-apple" class="size-10 text-orange-500" />
-              </div>
-
-              <h3 class="mb-2 text-xl font-bold">Premium Quality</h3>
-
-              <p class="text-gray-600">
-                Selected fruits processed using modern dehydration technology.
-              </p>
-            </div>
-          </UCard>
-
-          <UCard>
-            <div class="text-center">
-              <div
-                class="mx-auto mb-4 flex size-20 items-center justify-center rounded-full bg-green-50"
-              >
-                <UIcon
-                  name="i-lucide-handshake"
-                  class="size-10 text-green-700"
-                />
-              </div>
-
-              <h3 class="mb-2 text-xl font-bold">Reliable Supply</h3>
-
-              <p class="text-gray-600">
-                Consistent quality and scalable production for long-term
-                business partnerships.
-              </p>
-            </div>
-          </UCard>
-        </div>
-      </div>
-    </section>
-
-    <section class="px-4 py-8">
-      <div class="mb-6 text-center">
-        <h2 class="text-3xl font-bold text-green-900">Our Products</h2>
-      </div>
-
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <article
-          v-for="product in products"
-          :key="product.name"
-          class="overflow-hidden border border-border"
+      <section class="relative overflow-hidden rounded-2xl">
+        <UCarousel
+          v-slot="{ item }"
+          :prev="{ color: 'primary' }"
+          :next="{ variant: 'solid' }"
+          :items="home.sliders"
+          class="w-full mx-auto"
         >
-          <div class="relative">
-            <img
-              :src="product.image_url"
-              :alt="product.name"
-              class="h-auto w-full object-cover"
-            />
+          <img
+            :src="item.image_url"
+            :alt="item.title"
+            class="absolute inset-0 h-full w-full object-cover object-center"
+          />
 
-            <div
-              v-if="!product.available"
-              class="absolute inset-0 flex items-center justify-center bg-black/50"
-            >
-              <span class="text-white text-2xl font-bold tracking-wide">
-                Coming Soon
-              </span>
+          <div
+            class="relative flex min-h-96 items-center px-4 sm:px-6 lg:px-12 py-16"
+          >
+            <div class="w-full max-w-xl">
+              <p
+                class="mb-4 inline-flex items-center rounded-full bg-white/10 px-4 py-1 text-xs font-medium text-white backdrop-blur"
+              >
+                {{ item.title }}
+              </p>
+
+              <h1
+                class="mb-5 text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-white"
+              >
+                {{ item.subtitle }}
+              </h1>
+
+              <p
+                class="mb-8 text-sm sm:text-base md:text-lg leading-relaxed text-white/80"
+              >
+                {{ item.description }}
+              </p>
+
+              <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
+                <NuxtLink
+                  :to="`/${item.button_url}`"
+                  class="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-lg bg-amber-500 px-6 text-sm font-semibold text-white transition hover:bg-amber-600"
+                >
+                  <UIcon name="i-lucide-calendar" class="mr-2" />
+                  {{ item.button_text }}
+                </NuxtLink>
+
+                <NuxtLink
+                  to="/free-sample"
+                  class="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-lg border border-white/70 bg-white/10 px-6 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20"
+                >
+                  <UIcon name="i-lucide-gift" class="mr-2" />
+                  Free Sample
+                </NuxtLink>
+              </div>
             </div>
           </div>
+        </UCarousel>
+      </section>
 
-          <div class="space-y-3 p-4">
-            <h3 class="text-xl font-bold text-green-900">
-              {{ product.name }}
-            </h3>
+      <section class="bg-green-900 text-white rounded-2xl mt-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 px-6 py-8">
+          <div
+            v-for="item in home.highlights"
+            :key="item.title"
+            class="flex items-center gap-3"
+          >
+            <UIcon :name="item.icon" class="size-6 text-emerald-300" />
 
-            <p class="text-sm text-gray-600 line-clamp-2">
-              {{ product.description }}
-            </p>
+            <div>
+              <p class="font-semibold">
+                {{ item.title }}
+              </p>
 
-            <a
-              :href="`/products/${product.slug}`"
-              class="flex items-center gap-2 font-semibold"
-              :class="product.available ? 'text-green-800' : 'text-orange-500'"
-            >
-              {{ product.action }}
-              <UIcon name="i-lucide-arrow-right" class="size-4" />
-            </a>
-          </div>
-        </article>
-      </div>
-
-      <div class="relative mt-8 overflow-hidden rounded-2xl bg-green-800">
-        <img
-          src="/images/banners/cta.png"
-          class="absolute inset-0 h-full w-full object-cover opacity-30"
-          alt=""
-        />
-        <div class="relative p-6 md:p-8">
-          <div class="mb-6">
-            <h3 class="mb-2 text-3xl font-bold text-white">
-              Start With A Sample
-            </h3>
-
-            <p class="max-w-md text-green-100">
-              Experience the quality before making a purchasing decision.
-            </p>
-          </div>
-
-          <div class="flex items-center gap-4 max-w-xl">
-            <div class="grid gap-4 md:grid-cols-2">
-              <button
-                type="button"
-                class="flex py-2.5 w-full items-center justify-center rounded-lg bg-orange-500 px-6 font-semibold text-white transition hover:bg-orange-600"
-              >
-                <UIcon name="i-lucide-gift" class="mr-2 size-5" />
-                REQUEST FREE SAMPLE
-              </button>
-
-              <button
-                type="button"
-                class="flex py-2.5 w-full items-center justify-center rounded-lg border border-white/30 bg-white/10 px-6 font-semibold text-white backdrop-blur transition hover:bg-white/20"
-              >
-                <UIcon name="i-lucide-phone" class="mr-2 size-5" />
-                CONTACT OUR TEAM
-              </button>
+              <p class="text-xs text-white/70">
+                {{ item.subtitle }}
+              </p>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section class="px-4 py-10">
+        <h2 class="mb-10 text-center text-3xl font-bold text-green-900">
+          {{ home.why_choose_us.section_title }}
+        </h2>
+
+        <div class="space-y-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <UCard
+              v-for="(item, index) in home.why_choose_us.items"
+              :key="item.title"
+            >
+              <div class="text-center">
+                <div
+                  class="mx-auto mb-4 flex size-20 items-center justify-center rounded-full"
+                  :class="index === 1 ? 'bg-orange-50' : 'bg-green-50'"
+                >
+                  <UIcon
+                    :name="item.icon"
+                    class="size-10"
+                    :class="index === 1 ? 'text-orange-500' : 'text-green-700'"
+                  />
+                </div>
+
+                <h3 class="mb-2 text-xl font-bold">
+                  {{ item.title }}
+                </h3>
+
+                <p class="text-gray-600">
+                  {{ item.description }}
+                </p>
+              </div>
+            </UCard>
+          </div>
+        </div>
+      </section>
+
+      <section class="px-4 py-8">
+        <div class="text-center py-4">
+          <h2 class="text-3xl font-bold text-green-900">
+            {{ home?.products?.title }}
+          </h2>
+
+          <p class="mx-auto max-w-2xl text-gray-600">
+            {{ home?.products?.subtitle }}
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <ProductCard
+            v-for="product in home?.products?.items"
+            :product="product"
+          />
+        </div>
+      </section>
+
+      <section class="px-4 py-8">
+        <div class="relative overflow-hidden rounded-2xl bg-green-800">
+          <img
+            src="/images/banners/cta.png"
+            class="absolute inset-0 h-full w-full object-cover opacity-30"
+            alt=""
+          />
+
+          <div class="relative p-6 md:p-8">
+            <div class="mb-6">
+              <h3 class="mb-2 text-3xl font-bold text-white">
+                {{ home?.cta?.title }}
+              </h3>
+
+              <p class="max-w-md text-green-100">
+                {{ home?.cta?.description }}
+              </p>
+            </div>
+
+            <div class="max-w-xl">
+              <div class="grid gap-4 md:grid-cols-2">
+                <NuxtLink
+                  :to="home?.cta?.primary_button_url"
+                  class="flex w-full items-center justify-center rounded-lg bg-orange-500 px-6 py-2.5 font-semibold text-white transition hover:bg-orange-600"
+                >
+                  <UIcon name="i-lucide-gift" class="mr-2 size-5" />
+                  {{ home?.cta?.primary_button_text }}
+                </NuxtLink>
+
+                <NuxtLink
+                  :to="home?.cta?.secondary_button_url"
+                  class="flex w-full items-center justify-center rounded-lg border border-white/30 bg-white/10 px-6 py-2.5 font-semibold text-white backdrop-blur transition hover:bg-white/20"
+                >
+                  <UIcon name="i-lucide-phone" class="mr-2 size-5" />
+                  {{ home?.cta?.secondary_button_text }}
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <EmptyState v-else />
   </main>
 </template>
 

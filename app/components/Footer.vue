@@ -1,95 +1,123 @@
 <script setup>
+const settings = useSettings();
 const year = new Date().getFullYear();
-
-const socialLinks = [
-  { icon: "i-simple-icons-facebook", url: "#" },
-  { icon: "i-simple-icons-instagram", url: "#" },
-  { icon: "i-simple-icons-linkedin", url: "#" },
-  { icon: "i-simple-icons-youtube", url: "#" },
-];
 </script>
 
 <template>
   <footer class="bg-green-950 text-white">
-    <div class="container mx-auto px-6 py-14">
+    <div class="max-w-7xl mx-auto px-4 py-12">
       <div class="grid gap-12 lg:grid-cols-3">
         <div>
-          <h2 class="text-3xl font-bold tracking-wide">SHAANTI</h2>
+          <h2 class="text-3xl font-bold tracking-wide">
+            {{ settings?.site_name }}
+          </h2>
+
           <div class="mt-4 h-1 w-20 rounded-full bg-amber-400" />
+
           <p class="mt-6 max-w-md text-white/80 leading-7">
-            Shaanti Foods (BD) Limited is committed to delivering premium mango
-            products worldwide with uncompromising quality, food safety, and
-            customer satisfaction.
+            {{ settings?.description }}
           </p>
 
           <div class="mt-8 flex items-center gap-4">
             <a
-              v-for="social in socialLinks"
-              :key="social.icon"
-              :href="social.url"
+              v-for="(social, name) in settings?.social_links"
+              :key="name"
+              :href="social?.url || '#'"
               target="_blank"
+              rel="noopener noreferrer"
               class="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/5 transition hover:border-amber-400 hover:bg-amber-400 hover:text-green-950"
             >
-              <UIcon :name="social.icon" class="h-5 w-5" />
+              <UIcon :name="social?.icon" class="h-5 w-5" />
             </a>
           </div>
         </div>
 
         <div>
           <h3 class="mb-5 text-lg font-semibold">Contact Information</h3>
+
           <div class="space-y-5 text-white/80">
             <div class="flex gap-3">
               <UIcon
                 name="i-lucide-map-pin"
                 class="mt-1 h-5 w-5 text-amber-400"
               />
+
               <span>
-                Jogitala, Bason, Gazipur Sadar<br />
-                Gazipur-1704, Bangladesh
+                {{ settings?.address?.line_1 }}<br />
+                {{ settings?.address?.line_2 }}
               </span>
             </div>
 
             <div class="flex gap-3">
-              <UIcon name="i-lucide-mail" class="h-5 w-5 text-amber-400" />
-              <span>shaantifoodsbd@gmail.com</span>
+              <UIcon name="i-lucide-phone" class="h-5 w-5 text-amber-400" />
+
+              <a
+                :href="settings?.phone ? 'tel:' + settings.phone : '#'"
+                class="hover:text-amber-400"
+              >
+                {{ settings?.phone }}
+              </a>
             </div>
+
+            <div class="flex gap-3">
+              <UIcon name="i-lucide-mail" class="h-5 w-5 text-amber-400" />
+
+              <a
+                :href="settings?.email ? 'mailto:' + settings.email : '#'"
+                class="hover:text-amber-400"
+              >
+                {{ settings?.email }}
+              </a>
+            </div>
+
             <div class="flex gap-3">
               <UIcon name="i-lucide-globe" class="h-5 w-5 text-amber-400" />
-              <span>www.shaantifoods.com</span>
+
+              <a
+                :href="websiteUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-amber-400"
+              >
+                {{ settings?.website }}
+              </a>
             </div>
           </div>
         </div>
 
         <div>
-          <h3 class="mb-5 text-lg font-semibold">About Our Commitment</h3>
+          <h3 class="mb-5 text-lg font-semibold">
+            {{ settings?.commitment_title }}
+          </h3>
+
           <p class="text-white/80 leading-7">
-            We ensure global export standards, hygienic processing, and
-            sustainable sourcing practices. Every product reflects our
-            dedication to quality and trust.
+            {{ settings?.commitment_description }}
           </p>
+
           <div class="mt-6 rounded-xl border border-white/10 bg-white/5 p-5">
             <p class="text-sm text-white/70">
-              Certified & export-ready food processing company serving
-              international markets.
+              {{ settings?.certification_text }}
             </p>
           </div>
         </div>
       </div>
+    </div>
 
-      <div
-        class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-sm text-white/60 lg:flex-row"
-      >
-        <p>© {{ year }} Shaanti Foods (BD) Limited. All Rights Reserved.</p>
+    <div
+      class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-5 text-center text-sm text-white/80 md:flex-row md:text-left"
+    >
+      <p class="leading-relaxed">
+        {{ `© ${year} Shaanti Foods (BD) Limited. All Rights Reserved.` }}
+      </p>
 
-        <div class="flex gap-6">
-          <NuxtLink to="/privacy-policy" class="hover:text-amber-400">
-            Privacy Policy
-          </NuxtLink>
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+        <NuxtLink to="/privacy-policy" class="transition hover:text-amber-400">
+          Privacy Policy
+        </NuxtLink>
 
-          <NuxtLink to="/terms" class="hover:text-amber-400">
-            Terms & Conditions
-          </NuxtLink>
-        </div>
+        <NuxtLink to="/terms" class="transition hover:text-amber-400">
+          Terms & Conditions
+        </NuxtLink>
       </div>
     </div>
   </footer>

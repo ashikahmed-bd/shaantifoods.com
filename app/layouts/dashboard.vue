@@ -1,10 +1,4 @@
-<script setup>
-const supabase = useSupabaseClient();
-
-const logout = async () => {
-  await supabase.auth.signOut();
-};
-</script>
+<script setup></script>
 
 <template>
   <div class="min-h-screen bg-slate-100">

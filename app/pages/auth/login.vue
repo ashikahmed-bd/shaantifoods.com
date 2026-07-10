@@ -1,37 +1,20 @@
 <script setup>
-const supabase = useSupabaseClient();
-const router = useRouter();
-
-const message = ref("");
-const loading = ref(false);
+const authStore = useAuthStore();
+const toast = useToast();
 
 const form = reactive({
   email: "info@shaantifoods.com",
   password: "password",
 });
 
-const login = async () => {
-  loading.value = true;
-  message.value = "";
-
-  try {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: form.email,
-      password: form.password,
-    });
-
-    if (error) {
-      message.value = error.message;
-      return;
-    }
-
-    message.value = "Login successful!";
-    router.push("/dashboard");
-  } catch (error) {
-    message.value = "Something went wrong";
-  } finally {
-    loading.value = false;
-  }
+const submit = async () => {
+  const response = await authStore.login(form);
+  toast.add({
+    title: response.message,
+  });
+  setTimeout(() => {
+    navigateTo("/dashboard");
+  }, 1500);
 };
 </script>
 
@@ -43,7 +26,7 @@ const login = async () => {
         <p class="text-gray-500 text-sm mt-1">Sign in to your account</p>
       </div>
 
-      <form @submit.prevent="login" class="space-y-4">
+      <form @submit.prevent="submit" class="space-y-4">
         <div>
           <label class="text-sm text-gray-600">Email</label>
           <input
@@ -75,7 +58,9 @@ const login = async () => {
           </a>
         </div>
 
-        <BaseButton class="w-full"> Sign In </BaseButton>
+        <BaseButton :loading="authStore.loading" class="w-full">
+          Sign In
+        </BaseButton>
       </form>
 
       <p class="text-center text-sm text-gray-500 mt-6">
