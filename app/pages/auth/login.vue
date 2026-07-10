@@ -3,8 +3,8 @@ const authStore = useAuthStore();
 const toast = useToast();
 
 const form = reactive({
-  email: "info@shaantifoods.com",
-  password: "password",
+  email: "",
+  password: "",
 });
 
 const submit = async () => {
