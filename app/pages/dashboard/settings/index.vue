@@ -58,8 +58,12 @@ definePageMeta({
         <template #shop>
           <SettingsShop />
         </template>
-        <template #about> </template>
-        <template #contact> </template>
+        <template #about>
+          <SettingsAbout />
+        </template>
+        <template #contact>
+          <SettingsContact />
+        </template>
       </UTabs>
     </UCard>
   </main>
